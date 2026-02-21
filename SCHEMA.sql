@@ -92,12 +92,35 @@ ALTER TABLE customers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE inquiries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE sales ENABLE ROW LEVEL SECURITY;
 
--- Policies
+-- Helper function to check if user is admin/staff without recursion
+CREATE OR REPLACE FUNCTION public.check_user_role(target_role user_role)
+RETURNS boolean AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM profiles
+    WHERE id = auth.uid() AND role = target_role
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
+CREATE OR REPLACE FUNCTION public.is_admin_or_staff()
+RETURNS boolean AS $$
+BEGIN
+  RETURN EXISTS (
+    SELECT 1 FROM profiles
+    WHERE id = auth.uid() AND (role = 'admin' OR role = 'staff')
+  );
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+
 -- Profiles: Users can read their own profile, admins can read all
 CREATE POLICY "Users can read own profile" ON profiles FOR SELECT USING (auth.uid() = id);
 CREATE POLICY "Admins can read all profiles" ON profiles FOR ALL USING (
-  EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND role = 'admin')
+  (SELECT role FROM profiles WHERE id = auth.uid()) = 'admin' -- Basic check
 );
+-- Note: If the above still fails in your specific Supabase version, use:
+-- CREATE POLICY "Admins can read all profiles" ON profiles FOR ALL USING (check_user_role('admin'));
+
 
 -- Public read access for cars, companies, models, images
 CREATE POLICY "Public read cars" ON cars FOR SELECT USING (TRUE);

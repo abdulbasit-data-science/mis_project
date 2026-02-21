@@ -1,6 +1,9 @@
+'use client'
+
 import Link from 'next/link'
 import { CarFront, LayoutDashboard, Car, MessageSquare, BadgeDollarSign, LogOut, Menu, X } from 'lucide-react'
 import { useState } from 'react'
+
 
 const navItems = [
     { name: 'Dashboard', href: '/admin/dashboard', icon: LayoutDashboard },
@@ -45,7 +48,7 @@ export default function Sidebar() {
                     ))}
                 </nav>
 
-                <div className="absolute bottom-0 w-full p-4 border-t border-slate-800">
+                <div className="absolute bottom-0 w-full p-4 border-t border-slate-800 space-y-2">
                     <form action="/auth/signout" method="post">
                         <button className="flex items-center gap-3 px-4 py-3 w-full rounded-lg hover:bg-red-900/20 text-red-400 transition-colors">
                             <LogOut size={20} />

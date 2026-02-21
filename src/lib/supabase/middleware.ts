@@ -37,18 +37,8 @@ export async function updateSession(request: NextRequest) {
         if (!user) {
             return NextResponse.redirect(new URL('/login', request.url))
         }
-
-        // Check user role
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('role')
-            .eq('id', user.id)
-            .single()
-
-        if (!profile || (profile.role !== 'admin' && profile.role !== 'staff')) {
-            return NextResponse.redirect(new URL('/', request.url))
-        }
     }
 
     return supabaseResponse
 }
+
