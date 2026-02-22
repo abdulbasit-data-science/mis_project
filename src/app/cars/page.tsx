@@ -3,6 +3,7 @@ import CarCard from '@/components/CarCard'
 import SearchInput from '@/components/SearchInput'
 import { Filter, ArrowLeft, Search } from 'lucide-react'
 import Link from 'next/link'
+import MockAd from '@/components/MockAd'
 
 export default async function InventoryPage({
     searchParams,
@@ -50,6 +51,10 @@ export default async function InventoryPage({
 
             {/* Listings */}
             <main className="max-w-7xl mx-auto px-4 lg:px-8 py-12">
+                <div className="mb-12">
+                    <MockAd variant="banner" />
+                </div>
+
                 <div className="flex items-center justify-between mb-8">
                     <p className="text-slate-500 font-medium">Showing <span className="text-slate-900 font-bold">{cars.length}</span> luxury vehicles</p>
                 </div>

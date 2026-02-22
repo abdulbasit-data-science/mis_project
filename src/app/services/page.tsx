@@ -1,5 +1,6 @@
 import { CarFront, Zap, ShieldCheck, Star, BadgeDollarSign, Truck, Sparkles, Wrench } from 'lucide-react'
 import Link from 'next/link'
+import MockAd from '@/components/MockAd'
 
 export default function ServicesPage() {
     const services = [
@@ -109,6 +110,12 @@ export default function ServicesPage() {
                             </button>
                         </div>
                     </div>
+                </div>
+            </section>
+            {/* Services Page Ad Placement */}
+            <section className="py-20 bg-slate-50">
+                <div className="max-w-3xl mx-auto px-4 lg:px-8">
+                    <MockAd variant="sidebar" />
                 </div>
             </section>
         </div>

@@ -3,6 +3,8 @@ import CarCard from '@/components/CarCard'
 import { Search, CarFront, Star, ShieldCheck, Zap, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import Slideshow from '@/components/Slideshow'
+import MockAd from '@/components/MockAd'
 
 export default async function HomePage() {
   const cars = await getCars()
@@ -21,54 +23,12 @@ export default async function HomePage() {
             <Link href="/cars" className="font-bold hover:text-amber-500 transition-colors tracking-tight">INVENTORY</Link>
             <Link href="/services" className="font-bold hover:text-amber-500 transition-colors tracking-tight">SERVICES</Link>
             <Link href="/about" className="font-bold hover:text-amber-500 transition-colors tracking-tight">OUR STORY</Link>
-
           </div>
         </div>
       </nav>
 
-      {/* Cinematic Hero */}
-      <header className="relative h-screen flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/40 to-white z-10" />
-        <video
-          autoPlay
-          muted
-          loop
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover scale-105"
-        >
-          <source src="https://assets.mixkit.co/videos/preview/mixkit-luxury-car-parked-in-a-garage-34537-large.mp4" type="video/mp4" />
-        </video>
-
-        <div className="relative z-20 text-center text-white px-4 max-w-5xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-md rounded-full mb-8 border border-white/20">
-            <Star size={16} className="text-amber-500 fill-amber-500" />
-            <span className="text-xs font-black tracking-[0.2em] uppercase">The Ultimate Driving Experience</span>
-          </div>
-          <h1 className="text-6xl md:text-8xl font-black mb-8 leading-[0.9] tracking-tighter">
-            ELEGANCE IN <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600">MOTION</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-slate-200 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-            Curated selection of the world's most prestigious vehicles.
-            Where luxury meets performance.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/cars" className="px-10 py-5 bg-amber-500 text-slate-900 font-black rounded-2xl hover:bg-white transition-all shadow-2xl hover:scale-105">
-              EXPLORE INVENTORY
-            </Link>
-            <button className="px-10 py-5 bg-white/10 backdrop-blur-md border border-white/30 text-white font-black rounded-2xl hover:bg-white/20 transition-all">
-              BOOK CONSULTATION
-            </button>
-          </div>
-        </div>
-
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-          <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-            <div className="w-1 h-2 bg-white rounded-full"></div>
-          </div>
-        </div>
-      </header>
+      {/* Premium Hero Slideshow */}
+      <Slideshow />
 
       {/* Professional Features */}
       <section className="py-32 max-w-7xl mx-auto px-4 lg:px-8">
@@ -121,7 +81,13 @@ export default async function HomePage() {
             )}
           </div>
         </div>
+      </section>      {/* Featured Collection Ad Placement */}
+      <section className="bg-slate-50 pb-32">
+        <div className="max-w-7xl mx-auto px-4 lg:px-8">
+          <MockAd variant="banner" />
+        </div>
       </section>
+
 
       {/* Premium CTA / About Section */}
       <section className="relative h-[80vh] flex items-center bg-slate-900 overflow-hidden">
